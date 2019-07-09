@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Job Board</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
+  </head>
+  <body>
+
+    <!--NAVBAR-->
+    <div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+  </div>
+    <!--NAVBAR-->
+    <div id="content">
+
+      <nav id="nav">
+
+          {% for job in jobs %}
+
+          <a href="#{{job.url}}">{{job.title}}</a>
+
+          {% endfor %}
+
+      </nav>
+
+      <main>
+
+          {% for job in jobs %}
+          
+
+          {% if job.sponsored %}
+          <div id="{{job.url}}" class="page" style="background: #ffc2c2">
+            
+            <h1>{{job.title}}</h1>
+            <h3>{{job.location}}</h3>
+            <p>Job Type: {{job.type}}</p>
+            <p>Salary: {{job.salary}}</p>
+            <p>{{job.description}}</p>
+            <a href="apply/{{job.url}}">Apply</a>
+          </div>
+          {% endif %}
+
+          {% if job.sponsored == False%}
+          <div id="{{job.url}}" class="page">
+            <h1>{{job.title}}</h1>
+            <h3>{{job.location}}</h3>
+            <p>Job Type: {{job.type}}</p>
+            <p>Salary: {{job.salary}}</p>
+            <p>{{job.description}}</p>
+            <a href="apply/{{job.url}}">Apply</a>
+          </div>
+          {% endif %}
+
+          {% endfor %}
+
+
+
+      </main>
+    </div>
+  </body>
+</html>
+
